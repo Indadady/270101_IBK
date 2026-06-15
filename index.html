@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[IBK기업은행] 상해 2박 3일 해외연수 - 스마트 제안 가이드</title>
+    <meta name="description" content="IBK기업은행 상해 디지털 금융·모바일 결제·은행 혁신 벤치마킹 연수 제안 스마트 가이드북">
+    <meta property="og:title" content="IBK기업은행 상해 2박 3일 해외연수 제안">
+    <meta property="og:description" content="디지털 금융·핀테크·모바일 결제 벤치마킹과 상해 핵심 관광을 균형 있게 담은 교육연수 제안안">
+    <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/e/e9/Lujiazui_financial_district_from_Oriental_Pearl_Tower_%28October_1st_2022%29.jpg">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Nanum+Myeongjo:wght@700;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+
+    <style>
+        :root { --ibk-blue: #004098; --ibk-light: #0066cc; }
+        body { font-family: 'Noto Sans KR', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        .hero-bg {
+            background: linear-gradient(rgba(0, 40, 98, 0.82), rgba(0, 40, 98, 0.55)),
+                url('https://upload.wikimedia.org/wikipedia/commons/e/e9/Lujiazui_financial_district_from_Oriental_Pearl_Tower_%28October_1st_2022%29.jpg');
+            background-size: cover; background-position: center; background-attachment: fixed;
+        }
+        @media (max-width: 768px) { .hero-bg { background-attachment: scroll; } }
+        #map { height: 500px; width: 100%; border-radius: 1rem; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); z-index: 10; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .animate-fade-in-up { animation: fadeInUp 0.8s ease-out forwards; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        section { scroll-margin-top: 80px; }
+        @keyframes popIn { 0% { transform: scale(0); opacity: 0; } 80% { transform: scale(1.2); opacity: 1; } 100% { transform: scale(1); opacity: 1; } }
+        .custom-icon div { box-shadow: 0 2px 5px rgba(0,0,0,0.3); transition: transform 0.2s; }
+        .custom-icon div:hover { transform: scale(1.1); z-index: 100; }
+        .timeline-dot {
+            position: absolute; left: -25px; top: 4px; width: 16px; height: 16px;
+            border-radius: 50%; border: 3px solid white; box-shadow: 0 0 0 2px var(--tw-ring-color);
+            background-color: var(--tw-bg-color);
+        }
+        @media print {
+            @page { size: A4; margin: 10mm; }
+            body { background-color: white !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+            a[href]:after { content: none !important; }
+            table { page-break-inside: auto; word-break: keep-all; }
+            tr { page-break-inside: avoid; }
+            th { background-color: #004098 !important; color: white !important; }
+            .print-hidden { display: none !important; }
+        }
+    </style>
+</head>
+<body class="antialiased pb-20 md:pb-0 print:pb-0 print:bg-white">
+
+<div class="print-hidden">
+
+    <header class="bg-white/95 backdrop-blur-md shadow-md sticky top-0 z-50 border-b-2 border-[#004098]">
+        <nav class="container mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3 shrink-0">
+                <a href="http://tourmaker.kr" target="_blank">
+                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgHfgIX70O5k6Anuo0UgALIdaG9jSga9auHu3uyz0uEirylGPAJnjN_qQbvEGMUvPqUQf_g9FMNUHRxlDcUBf4vZ3Mpy4TnA9WxbmzWYK11gt2zuy_Irl4wctNFjcjLyPo0GPXV792o_J7L9guRMuDfeC1gy7USwywjYbECZgzcsHybuGRRAXAnO1eNmP8/s320/logo.png" alt="Tourmaker" class="h-8">
+                </a>
+                <span class="bg-[#004098] text-white text-[10px] px-2 py-0.5 rounded-full font-bold">IBK 제안</span>
+            </div>
+            <div class="flex-1 overflow-x-auto no-scrollbar ml-4">
+                <div class="flex items-center space-x-1 md:space-x-5 whitespace-nowrap pr-4 text-sm">
+                    <a href="#home" class="px-2 py-2 font-bold text-slate-600 hover:text-[#004098]">홈</a>
+                    <a href="#overview" class="px-2 py-2 font-bold text-[#004098]"><i class="fa-solid fa-building-columns mr-1"></i>행사개요</a>
+                    <a href="#training" class="px-2 py-2 font-medium text-slate-600 hover:text-[#004098]">연수방향</a>
+                    <a href="#flight" class="px-2 py-2 font-medium text-slate-600 hover:text-[#004098]">항공/호텔</a>
+                    <a href="#map-section" class="px-2 py-2 font-medium text-slate-600 hover:text-[#004098]">탐방동선</a>
+                    <a href="#schedule" class="px-2 py-2 font-bold text-slate-800"><i class="fa-solid fa-calendar-check mr-1"></i>상세일정</a>
+                    <a href="#spots" class="px-2 py-2 font-medium text-slate-600 hover:text-[#004098]">관광안내</a>
+                    <a href="#dining" class="px-2 py-2 font-medium text-rose-600 hover:text-rose-800"><i class="fa-solid fa-utensils mr-1"></i>식사안내</a>
+                    <a href="#smart-info" class="px-2 py-2 font-medium text-blue-600 hover:text-blue-800">현지정보</a>
+                    <a href="#check" class="px-2 py-2 font-medium text-slate-600 hover:text-[#004098]">준비물</a>
+                    <a href="price-estimate.html" class="px-2 py-2 font-bold text-emerald-700 hover:text-emerald-900"><i class="fa-solid fa-file-invoice-dollar mr-1"></i>가격산출</a>
+                </div>
+            </div>
+            <button onclick="shareLink()" class="shrink-0 p-2 text-slate-500 hover:text-[#004098] ml-2" title="공유"><i class="fa-solid fa-share-nodes text-xl"></i></button>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section id="home" class="hero-bg min-h-screen flex items-center justify-center text-center px-4">
+        <div class="animate-fade-in-up text-white w-full max-w-5xl flex flex-col items-center z-10">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="bg-white/95 px-5 py-2 rounded-xl shadow-lg">
+                    <span class="text-[#004098] font-black text-lg tracking-tight">참! 좋은 은행 IBK기업은행</span>
+                </div>
+            </div>
+            <h1 class="text-3xl md:text-5xl font-black mb-3 drop-shadow-2xl font-[Nanum Myeongjo] leading-tight">
+                IBK기업은행 상해 2박 3일<br>해외연수 제안
+            </h1>
+            <p class="text-lg md:text-2xl text-amber-300 font-bold mb-6">상해 디지털 금융·모바일 결제·은행 혁신 벤치마킹 연수</p>
+            <div class="bg-black/70 backdrop-blur-sm inline-block px-8 py-5 rounded-2xl border border-white/20 text-left md:text-center">
+                <p class="text-base md:text-lg text-white font-medium"><i class="fa-solid fa-location-dot text-amber-400 mr-2"></i>중국 상해 · 2박 3일</p>
+                <p class="text-sm md:text-base text-slate-300 mt-2">1회 약 200명 · 연 5회 · 총 1,000명 규모</p>
+                <p class="text-sm md:text-base text-slate-300 mt-1">국적기 우선 · 5성급 호텔 · 전용 대형버스 5대</p>
+            </div>
+            <a href="#overview" class="mt-8 inline-flex items-center gap-2 bg-[#004098] hover:bg-[#003080] text-white font-bold px-8 py-3 rounded-full shadow-lg transition">
+                제안 내용 살펴보기 <i class="fa-solid fa-chevron-down"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Overview -->
+    <section id="overview" class="py-12 bg-white -mt-8 rounded-t-3xl relative z-20 shadow-[0_-5px_20px_rgba(0,0,0,0.1)]">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-10">
+                <span class="text-[#004098] font-black tracking-widest text-xs uppercase">PROPOSAL OVERVIEW</span>
+                <h2 class="text-2xl md:text-3xl font-bold text-slate-800 mt-2">행사 개요 및 제안 구성</h2>
+                <p class="text-sm text-slate-500 mt-2">200명 단체 이동 안정성 · 교육연수 목적 부합 · 5성급 숙박 · 상해 핵심 관광 균형 반영</p>
+            </div>
+
+            <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-slate-50 rounded-2xl border border-slate-200 p-6 shadow-sm">
+                    <h3 class="font-bold text-lg text-[#004098] mb-4 flex items-center gap-2"><i class="fa-solid fa-clipboard-list"></i> 행사 기본 정보</h3>
+                    <dl class="space-y-3 text-sm">
+                        <div class="flex gap-3"><dt class="w-24 shrink-0 font-bold text-slate-500">행사명</dt><dd class="text-slate-800">IBK기업은행 직원 대상 상해 디지털 금융·모바일 결제·은행 혁신 벤치마킹 연수</dd></div>
+                        <div class="flex gap-3"><dt class="w-24 shrink-0 font-bold text-slate-500">대상</dt><dd class="text-slate-800">10년차 내외 직원 · 과장급 전후 실무 핵심 인력</dd></div>
+                        <div class="flex gap-3"><dt class="w-24 shrink-0 font-bold text-slate-500">인원</dt><dd class="text-slate-800">1회 약 200명 × 5회 = 총 1,000명</dd></div>
+                        <div class="flex gap-3"><dt class="w-24 shrink-0 font-bold text-slate-500">지역/기간</dt><dd class="text-slate-800">중국 상해 · 2박 3일</dd></div>
+                        <div class="flex gap-3"><dt class="w-24 shrink-0 font-bold text-slate-500">항공</dt><dd class="text-slate-800">국적기 우선 (대한항공·아시아나항공 단체 좌석 확보 검토)</dd></div>
+                        <div class="flex gap-3"><dt class="w-24 shrink-0 font-bold text-slate-500">숙박</dt><dd class="text-slate-800">상해 5성급 호텔 2박 (안정성·위치·조식·단체 수용 중점)</dd></div>
+                    </dl>
+                </div>
+                <div class="bg-blue-50 rounded-2xl border border-blue-200 p-6 shadow-sm">
+                    <h3 class="font-bold text-lg text-[#004098] mb-4 flex items-center gap-2"><i class="fa-solid fa-gears"></i> 핵심 운영 방향</h3>
+                    <ul class="space-y-3 text-sm text-slate-700">
+                        <li class="flex gap-2"><i class="fa-solid fa-circle-check text-[#004098] mt-1"></i><span>국적기 기준 <strong>오전 출발·오후 귀국</strong> 스케줄 표준화</span></li>
+                        <li class="flex gap-2"><i class="fa-solid fa-circle-check text-[#004098] mt-1"></i><span>200명 규모 <strong>분할 편성·항공편 분산</strong>으로 이동 안정성 확보</span></li>
+                        <li class="flex gap-2"><i class="fa-solid fa-circle-check text-[#004098] mt-1"></i><span>공식 교육 일정은 <strong>2일차 또는 3일차 중간 시간대</strong> 삽입 협의 가능</span></li>
+                        <li class="flex gap-2"><i class="fa-solid fa-circle-check text-[#004098] mt-1"></i><span>전용 <strong>45인승 대형버스 5대</strong> (1대당 40명 편성) 운영</span></li>
+                        <li class="flex gap-2"><i class="fa-solid fa-circle-check text-[#004098] mt-1"></i><span>식당은 동선·수용 인원 기준 <strong>별도 확정</strong> (위생·맛·분위기 우선)</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="max-w-6xl mx-auto mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition">
+                    <div class="w-14 h-14 bg-[#004098] rounded-2xl flex items-center justify-center mb-4 text-2xl text-white"><i class="fa-solid fa-users-gear"></i></div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-2">대규모 단체 운영</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">200명 규모를 안정적으로 수용하기 위해 항공·차량·식당·호텔을 단체 요건에 맞춰 설계하였습니다.</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition">
+                    <div class="w-14 h-14 bg-[#004098] rounded-2xl flex items-center justify-center mb-4 text-2xl text-white"><i class="fa-solid fa-chart-line"></i></div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-2">금융 혁신 벤치마킹</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">디지털 금융·핀테크·모바일 결제·리테일 금융 혁신 사례를 중심으로 교육연수 목적에 부합하는 방문 프로그램을 제안합니다.</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition">
+                    <div class="w-14 h-14 bg-[#004098] rounded-2xl flex items-center justify-center mb-4 text-2xl text-white"><i class="fa-solid fa-city"></i></div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-2">관광·휴식 균형</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">와이탄 야경·주자각 수향마을·1000Trees 등 상해 핵심 명소와 마사지·서커스 등 힐링 프로그램을 조화롭게 배치하였습니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Training Direction -->
+    <section id="training" class="py-12 bg-slate-100 border-t border-slate-200">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-8">
+                <span class="text-slate-500 font-black tracking-widest text-xs uppercase">TRAINING FOCUS</span>
+                <h2 class="text-3xl font-bold text-slate-800 mt-2">공식 방문 및 벤치마킹 방향</h2>
+                <p class="text-sm text-slate-500 mt-2">중국 은행 또는 모바일 결제 플랫폼 관련 기관 방문 · 디지털 금융 혁신 사례 중심</p>
+            </div>
+            <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-md">
+                    <div class="bg-[#004098] text-white p-4 font-bold"><i class="fa-solid fa-landmark mr-2"></i>중국공상은행 상해지점</div>
+                    <p class="p-5 text-sm text-slate-600 leading-relaxed">대형 국영은행의 디지털 전환·모바일 뱅킹·리테일 금융 운영 사례를 현장에서 벤치마킹할 수 있는 후보 기관입니다.</p>
+                </div>
+                <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-md">
+                    <div class="bg-[#004098] text-white p-4 font-bold"><i class="fa-solid fa-museum mr-2"></i>상해 은행박물관</div>
+                    <p class="p-5 text-sm text-slate-600 leading-relaxed">중국 금융 발전사와 화폐·결제 수단의 변천을 체계적으로 이해할 수 있는 교육형 시설로 연수 프로그램에 적합합니다.</p>
+                </div>
+                <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-md">
+                    <div class="bg-[#004098] text-white p-4 font-bold"><i class="fa-solid fa-mobile-screen mr-2"></i>모바일 결제 체험</div>
+                    <p class="p-5 text-sm text-slate-600 leading-relaxed">알리페이·위챗페이 등 중국 모바일 결제 생태계를 직접 체험하며 글로벌 핀테크 트렌드를 이해합니다.</p>
+                </div>
+            </div>
+            <p class="text-center text-xs text-slate-500 mt-6 max-w-3xl mx-auto">※ 공식 방문 일정·기관은 최종 협의 후 확정되며, 2일차 또는 3일차 중간 시간대에 삽입 가능합니다.</p>
+        </div>
+    </section>
+
+    <!-- Flight & Hotel -->
+    <section id="flight" class="py-12 bg-white border-t border-slate-200">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-8">
+                <span class="text-slate-500 font-black tracking-widest text-xs uppercase">FLIGHT & HOTEL</span>
+                <h2 class="text-3xl font-bold text-slate-800 mt-2">추천 항공 및 호텔 안내</h2>
+            </div>
+
+            <div class="max-w-5xl mx-auto mb-10">
+                <h3 class="font-bold text-lg text-[#004098] mb-4"><i class="fa-solid fa-plane mr-2"></i>항공 안내 (국적기 우선)</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-slate-50 border border-slate-200 rounded-xl p-5">
+                        <span class="text-xs bg-red-600 text-white px-3 py-1 rounded-full font-bold">출국 1안</span>
+                        <p class="font-black text-lg text-slate-800 mt-3">아시아나 OZ361</p>
+                        <p class="text-slate-600">인천 09:00 <i class="fa-solid fa-plane text-red-400 mx-1"></i> 상해(푸동) 10:05</p>
+                    </div>
+                    <div class="bg-slate-50 border border-slate-200 rounded-xl p-5">
+                        <span class="text-xs bg-red-500 text-white px-3 py-1 rounded-full font-bold">출국 2안</span>
+                        <p class="font-black text-lg text-slate-800 mt-3">아시아나 OZ363</p>
+                        <p class="text-slate-600">인천 10:45 <i class="fa-solid fa-plane text-red-400 mx-1"></i> 상해(푸동) 11:45</p>
+                    </div>
+                    <div class="bg-slate-50 border border-slate-200 rounded-xl p-5">
+                        <span class="text-xs bg-slate-700 text-white px-3 py-1 rounded-full font-bold">귀국 1안</span>
+                        <p class="font-black text-lg text-slate-800 mt-3">아시아나 OZ366</p>
+                        <p class="text-slate-600">상해(푸동) 16:20 <i class="fa-solid fa-plane mx-1"></i> 인천 18:55~19:20</p>
+                    </div>
+                    <div class="bg-slate-50 border border-slate-200 rounded-xl p-5">
+                        <span class="text-xs bg-slate-500 text-white px-3 py-1 rounded-full font-bold">귀국 보조</span>
+                        <p class="font-black text-lg text-slate-800 mt-3">대한항공 KE888</p>
+                        <p class="text-slate-600">상해(푸동) 13:40 출발 (일정 단축 시 검토)</p>
+                    </div>
+                </div>
+                <div class="mt-4 bg-red-50 border border-red-200 rounded-xl p-4 text-sm text-slate-700">
+                    <strong class="text-red-700"><i class="fa-solid fa-triangle-exclamation mr-1"></i>인천공항 T2 안내:</strong>
+                    아시아나항공은 제2여객터미널(T2) 운항. 200명 규모 단체 출국 시 <strong>출발 3시간 전 집결</strong>을 권장합니다.
+                </div>
+            </div>
+
+            <div class="max-w-5xl mx-auto">
+                <h3 class="font-bold text-lg text-[#004098] mb-4"><i class="fa-solid fa-hotel mr-2"></i>숙소 후보 (5성급 호텔 2안)</h3>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="bg-white border-2 border-[#004098] rounded-2xl overflow-hidden shadow-lg">
+                        <div class="bg-[#004098] text-white px-5 py-2 font-bold text-sm">1안 · Pudong Shangri-La Shanghai</div>
+                        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80" alt="Pudong Shangri-La" class="w-full h-48 object-cover">
+                        <div class="p-5 space-y-2 text-sm text-slate-700">
+                            <p><i class="fa-solid fa-check text-[#004098] mr-2"></i>푸동 루자쭈이 금융지구 위치</p>
+                            <p><i class="fa-solid fa-check text-[#004098] mr-2"></i>금융도시 이미지와 품격 강조</p>
+                            <p><i class="fa-solid fa-check text-[#004098] mr-2"></i>상하이타워·동방명주·와이탄 접근 우수</p>
+                        </div>
+                    </div>
+                    <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-md">
+                        <div class="bg-slate-700 text-white px-5 py-2 font-bold text-sm">2안 · The Westin Bund Center Shanghai</div>
+                        <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800&q=80" alt="Westin Bund Center" class="w-full h-48 object-cover">
+                        <div class="p-5 space-y-2 text-sm text-slate-700">
+                            <p><i class="fa-solid fa-check text-slate-600 mr-2"></i>와이탄·예원·난징동루 동선 우수</p>
+                            <p><i class="fa-solid fa-check text-slate-600 mr-2"></i>이동 효율성 및 조식 우수</p>
+                            <p><i class="fa-solid fa-check text-slate-600 mr-2"></i>관광 만족도 중심 구성에 적합</p>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-xs text-slate-500 mt-4 text-center">※ 최종 항공·호텔은 출발일, 단체 좌석·객실 확보, 단체 요금 조건에 따라 확정됩니다.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map -->
+    <section id="map-section" class="py-12 bg-slate-50 border-t border-slate-200">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-8">
+                <span class="text-slate-600 font-black tracking-widest text-xs uppercase">ROUTING MAP</span>
+                <h2 class="text-3xl font-bold text-slate-800 mt-2">한눈에 보는 탐방 동선</h2>
+            </div>
+            <div class="flex flex-wrap justify-center gap-2 mb-6" id="map-controls">
+                <button onclick="changeMapRoute('all')" class="map-btn active px-5 py-2 rounded-full border bg-[#004098] text-white text-sm font-bold shadow-md">전체 여정</button>
+                <button onclick="changeMapRoute('day1')" class="map-btn px-5 py-2 rounded-full border bg-white text-slate-600 text-sm font-bold">1일차</button>
+                <button onclick="changeMapRoute('day2')" class="map-btn px-5 py-2 rounded-full border bg-white text-slate-600 text-sm font-bold">2일차</button>
+                <button onclick="changeMapRoute('day3')" class="map-btn px-5 py-2 rounded-full border bg-white text-slate-600 text-sm font-bold">3일차</button>
+            </div>
+            <div class="max-w-5xl mx-auto border border-slate-200 rounded-2xl p-1 shadow-lg bg-white">
+                <div id="map"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Schedule -->
+    <section id="schedule" class="py-16 bg-white border-t border-slate-200">
+        <div class="container mx-auto px-4">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-center mb-10 relative">
+                    <span class="inline-block bg-blue-100 text-[#004098] text-xs px-3 py-1 rounded-full font-bold mb-3">OFFICIAL ITINERARY</span>
+                    <h2 class="text-3xl font-bold text-slate-800">일자별 상세 일정표</h2>
+                    <button onclick="window.print()" class="mt-6 md:mt-0 md:absolute md:right-0 md:top-1/2 md:-translate-y-1/2 bg-[#004098] hover:bg-[#003080] text-white text-sm font-bold py-2.5 px-5 rounded-xl shadow-md flex items-center gap-2 mx-auto md:mx-0">
+                        <i class="fa-solid fa-print"></i> 일정표 인쇄
+                    </button>
+                </div>
+
+                <div class="flex overflow-x-auto no-scrollbar gap-2 mb-8 justify-start md:justify-center">
+                    <button class="tab-btn active shrink-0 px-6 py-3 rounded-2xl border-2 border-[#004098] bg-[#004098] text-white font-bold text-sm" onclick="openTab(event,'day1');changeMapRoute('day1')">1일차</button>
+                    <button class="tab-btn shrink-0 px-6 py-3 rounded-2xl border-2 border-slate-200 bg-white text-slate-500 font-bold text-sm" onclick="openTab(event,'day2');changeMapRoute('day2')">2일차</button>
+                    <button class="tab-btn shrink-0 px-6 py-3 rounded-2xl border-2 border-slate-200 bg-white text-slate-500 font-bold text-sm" onclick="openTab(event,'day3');changeMapRoute('day3')">3일차</button>
+                </div>
+
+                <div class="bg-white rounded-3xl shadow-xl border border-slate-200 overflow-hidden">
+                    <div id="day1" class="tab-content p-6 md:p-10">
+                        <div class="flex items-center gap-4 mb-8 border-b pb-6">
+                            <span class="text-4xl bg-blue-100 p-4 rounded-2xl text-[#004098]"><i class="fa-solid fa-plane-arrival"></i></span>
+                            <div>
+                                <h3 class="font-bold text-2xl text-slate-800">인천 출발 · 상해 도착 · 역사·도시문화·야경</h3>
+                                <p class="text-sm text-slate-500 mt-1">중식: 공항-호텔 동선 현지식 / 석식: 난징동루·와이탄 인근</p>
+                            </div>
+                        </div>
+                        <div class="relative border-l-2 border-slate-200 ml-4 pl-8 space-y-6 text-sm">
+                            <div class="relative"><div class="timeline-dot bg-slate-500" style="--tw-ring-color:#e2e8f0;--tw-bg-color:#64748b"></div><h4 class="font-bold text-slate-800">06:00 인천국제공항 집결 및 출국 수속</h4></div>
+                            <div class="relative"><div class="timeline-dot bg-red-600" style="--tw-ring-color:#fecaca;--tw-bg-color:#dc2626"></div><h4 class="font-bold text-slate-800">09:00 아시아나 OZ361 인천 출발</h4></div>
+                            <div class="relative"><div class="timeline-dot bg-slate-600" style="--tw-ring-color:#e2e8f0;--tw-bg-color:#475569"></div><h4 class="font-bold text-slate-800">10:05 상해 푸동국제공항 도착 · 입국 수속</h4></div>
+                            <div class="relative"><div class="timeline-dot bg-amber-600" style="--tw-ring-color:#fde68a;--tw-bg-color:#d97706"></div><h4 class="font-bold text-slate-800">12:30 중식</h4></div>
+                            <div class="relative"><div class="timeline-dot bg-[#004098]" style="--tw-ring-color:#bfdbfe;--tw-bg-color:#004098"></div><h4 class="font-bold text-slate-800">14:00 호텔 체크인 및 휴식</h4></div>
+                            <div class="relative"><div class="timeline-dot bg-amber-700" style="--tw-ring-color:#fde68a;--tw-bg-color:#b45309"></div><h4 class="font-bold text-slate-800">15:20 상해 대한민국 임시정부청사 방문</h4></div>
+                            <div class="relative"><div class="timeline-dot bg-slate-500" style="--tw-ring-color:#e2e8f0;--tw-bg-color:#64748b"></div><h4 class="font-bold text-slate-800">16:00 신천지(新天地) 방문</h4></div>
+                            <div class="relative"><div class="timeline-dot bg-teal-600" style="--tw-ring-color:#99f6e4;--tw-bg-color:#0d9488"></div><h4 class="font-bold text-slate-800">17:20 난징동루 보행가 방문</h4></div>
+                            <div class="relative"><div class="timeline-dot bg-amber-600" style="--tw-ring-color:#fde68a;--tw-bg-color:#d97706"></div><h4 class="font-bold text-slate-800">18:20 석식</h4></div>
+                            <div class="relative"><div class="timeline-dot bg-blue-600" style="--tw-ring-color:#bfdbfe;--tw-bg-color:#2563eb"></div><h4 class="font-bold text-slate-800">19:50 와이탄 야경 감상</h4></div>
+                            <div class="relative"><div class="timeline-dot bg-blue-500" style="--tw-ring-color:#bfdbfe;--tw-bg-color:#3b82f6"></div><h4 class="font-bold text-slate-800">20:40 황푸강 유람선 탑승</h4></div>
+                            <div class="relative"><div class="timeline-dot bg-slate-400" style="--tw-ring-color:#e2e8f0;--tw-bg-color:#94a3b8"></div><h4 class="font-bold text-slate-800">21:30 호텔 투숙</h4></div>
+                        </div>
+                    </div>
+
+                    <div id="day2" class="tab-content hidden p-6 md:p-10">
+                        <div class="flex items-center gap-4 mb-8 border-b pb-6">
+                            <span class="text-4xl bg-amber-100 p-4 rounded-2xl text-amber-700"><i class="fa-solid fa-mug-hot"></i></span>
+                            <div>
+                                <h3 class="font-bold text-2xl text-slate-800">스타벅스 리저브 · 주자각 · 예원 · 서커스</h3>
+                                <p class="text-sm text-slate-500 mt-1">조식: 호텔 / 중식: 주자각 인근 / 석식: 예원·시내 중심</p>
+                            </div>
+                        </div>
+                        <div class="relative border-l-2 border-slate-200 ml-4 pl-8 space-y-6 text-sm">
+                            <div class="relative"><div class="timeline-dot bg-slate-400" style="--tw-ring-color:#e2e8f0;--tw-bg-color:#94a3b8"></div><h4 class="font-bold">07:00 호텔 조식</h4></div>
+                            <div class="relative"><div class="timeline-dot bg-slate-500" style="--tw-ring-color:#e2e8f0;--tw-bg-color:#64748b"></div><h4 class="font-bold">08:20 호텔 출발</h4></div>
+                            <div class="relative"><div class="timeline-dot bg-amber-800" style="--tw-ring-color:#fde68a;--tw-bg-color:#92400e"></div><h4 class="font-bold">09:00 스타벅스 리저브 로스터리 방문</h4></div>
+                            <div class="relative"><div class="timeline-dot bg-green-700" style="--tw-ring-color:#bbf7d0;--tw-bg-color:#15803d"></div><h4 class="font-bold">10:00 주자각(朱家角) 이동</h4></div>
+                            <div class="relative"><div class="timeline-dot bg-amber-600" style="--tw-ring-color:#fde68a;--tw-bg-color:#d97706"></div><h4 class="font-bold">11:30 중식</h4></div>
+                            <div class="relative"><div class="timeline-dot bg-green-600" style="--tw-ring-color:#bbf7d0;--tw-bg-color:#16a34a"></div><h4 class="font-bold">12:40 주자각 관광 및 뱃놀이</h4></div>
+                            <div class="relative"><div class="timeline-dot bg-red-700" style="--tw-ring-color:#fecaca;--tw-bg-color:#b91c1c"></div><h4 class="font-bold">14:00 예원 이동</h4></div>
+                            <div class="relative"><div class="timeline-dot bg-red-600" style="--tw-ring-color:#fecaca;--tw-bg-color:#dc2626"></div><h4 class="font-bold">15:00 예원 및 예원 옛거리 방문</h4></div>
+                            <div class="relative"><div class="timeline-dot bg-amber-600" style="--tw-ring-color:#fde68a;--tw-bg-color:#d97706"></div><h4 class="font-bold">17:30 석식</h4></div>
+                            <div class="relative"><div class="timeline-dot bg-rose-600" style="--tw-ring-color:#fecdd3;--tw-bg-color:#e11d48"></div><h4 class="font-bold">19:30 ERA 시공의 교차점(마시청 서커스)</h4></div>
+                            <div class="relative"><div class="timeline-dot bg-slate-600" style="--tw-ring-color:#e2e8f0;--tw-bg-color:#475569"></div><h4 class="font-bold">21:00 마사지 또는 호텔 휴식</h4><p class="text-slate-500 mt-1">발 마사지 60분 기본 (전신 업그레이드 시 현지 추가 비용)</p></div>
+                        </div>
+                    </div>
+
+                    <div id="day3" class="tab-content hidden p-6 md:p-10">
+                        <div class="flex items-center gap-4 mb-8 border-b pb-6">
+                            <span class="text-4xl bg-emerald-100 p-4 rounded-2xl text-emerald-700"><i class="fa-solid fa-tree"></i></span>
+                            <div>
+                                <h3 class="font-bold text-2xl text-slate-800">1000Trees · 상해 출발 · 인천 도착</h3>
+                                <p class="text-sm text-slate-500 mt-1">조식: 호텔 / 중식: 1000Trees 인근 / 석식: 기내식</p>
+                            </div>
+                        </div>
+                        <div class="relative border-l-2 border-slate-200 ml-4 pl-8 space-y-6 text-sm">
+                            <div class="relative"><div class="timeline-dot bg-slate-400" style="--tw-ring-color:#e2e8f0;--tw-bg-color:#94a3b8"></div><h4 class="font-bold">07:00 호텔 조식</h4></div>
+                            <div class="relative"><div class="timeline-dot bg-slate-500" style="--tw-ring-color:#e2e8f0;--tw-bg-color:#64748b"></div><h4 class="font-bold">08:00 체크아웃 및 수하물 정리</h4></div>
+                            <div class="relative"><div class="timeline-dot bg-slate-500" style="--tw-ring-color:#e2e8f0;--tw-bg-color:#64748b"></div><h4 class="font-bold">09:00 호텔 출발</h4></div>
+                            <div class="relative"><div class="timeline-dot bg-emerald-600" style="--tw-ring-color:#bbf7d0;--tw-bg-color:#059669"></div><h4 class="font-bold">10:00 천안천수 1000Trees 방문</h4></div>
+                            <div class="relative"><div class="timeline-dot bg-amber-600" style="--tw-ring-color:#fde68a;--tw-bg-color:#d97706"></div><h4 class="font-bold">11:30 중식</h4></div>
+                            <div class="relative"><div class="timeline-dot bg-slate-600" style="--tw-ring-color:#e2e8f0;--tw-bg-color:#475569"></div><h4 class="font-bold">12:40 상해 푸동국제공항 도착 및 수속</h4></div>
+                            <div class="relative"><div class="timeline-dot bg-red-600" style="--tw-ring-color:#fecaca;--tw-bg-color:#dc2626"></div><h4 class="font-bold">14:00 OZ366 상해 푸동 출발</h4></div>
+                            <div class="relative"><div class="timeline-dot bg-slate-800" style="--tw-ring-color:#e2e8f0;--tw-bg-color:#1e293b"></div><h4 class="font-bold">인천국제공항 도착 후 해산</h4><p class="text-slate-500 mt-1">예상 도착 18:55~19:20</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Spots -->
+    <section id="spots" class="py-16 bg-slate-50 border-t border-slate-200">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-10">
+                <span class="text-slate-500 font-black tracking-widest text-xs uppercase">ATTRACTIONS</span>
+                <h2 class="text-3xl font-bold text-slate-800 mt-2">주요 관광지 안내</h2>
+            </div>
+            <div class="max-w-6xl mx-auto space-y-10">
+                <div>
+                    <h3 class="font-bold text-xl text-[#004098] mb-4 border-b-2 border-[#004098] pb-2">1일차 · 역사와 야경</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-white rounded-xl border overflow-hidden shadow-sm">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Shanghai_Former_Provisional_Government_of_the_Republic_of_Korea.jpg/640px-Shanghai_Former_Provisional_Government_of_the_Republic_of_Korea.jpg" class="w-full h-36 object-cover" alt="임시정부청사">
+                            <div class="bg-[#004098] text-white text-sm font-bold px-4 py-2">상해 대한민국 임시정부청사</div>
+                            <p class="p-4 text-xs text-slate-600 leading-relaxed">3·1운동 이후 상해에서 독립운동을 전개한 역사 현장. 기업 연수에 역사·교육적 가치를 더하는 대표 코스입니다.</p>
+                        </div>
+                        <div class="bg-white rounded-xl border overflow-hidden shadow-sm">
+                            <img src="https://images.unsplash.com/photo-1547981609-4b6a23f7a5c0?w=640&q=80" class="w-full h-36 object-cover" alt="신천지">
+                            <div class="bg-[#004098] text-white text-sm font-bold px-4 py-2">신천지 (新天地)</div>
+                            <p class="p-4 text-xs text-slate-600 leading-relaxed">상하이 석문리 건축을 보존한 도시재생의 모범. 전통과 현대 상업이 조화를 이루는 복합문화 공간입니다.</p>
+                        </div>
+                        <div class="bg-white rounded-xl border overflow-hidden shadow-sm">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/The_Bund_1.jpg/640px-The_Bund_1.jpg" class="w-full h-36 object-cover" alt="와이탄">
+                            <div class="bg-[#004098] text-white text-sm font-bold px-4 py-2">와이탄 & 황푸강 유람선</div>
+                            <p class="p-4 text-xs text-slate-600 leading-relaxed">황푸강을 사이에 둔 와이탄과 푸동 스카이라인. 유람선에서 감상하는 야경이 상해 여행의 하이라이트입니다.</p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="font-bold text-xl text-[#004098] mb-4 border-b-2 border-[#004098] pb-2">2일차 · 현대 소비문화와 전통 수향</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-white rounded-xl border overflow-hidden shadow-sm">
+                            <img src="https://images.unsplash.com/photo-1495474472283-4d4bcdd4d1c6?w=640&q=80" class="w-full h-36 object-cover" alt="스타벅스 리저브">
+                            <div class="bg-amber-600 text-white text-sm font-bold px-4 py-2">스타벅스 리저브 로스터리</div>
+                            <p class="p-4 text-xs text-slate-600 leading-relaxed">2017년 개점 당시 세계 최대 규모. 로스팅·브루잉·베이커리를 한 공간에서 경험하는 글로벌 브랜드 마케팅의 교과서입니다.</p>
+                        </div>
+                        <div class="bg-white rounded-xl border overflow-hidden shadow-sm">
+                            <img src="https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=640&q=80" class="w-full h-36 object-cover" alt="주자각">
+                            <div class="bg-amber-600 text-white text-sm font-bold px-4 py-2">주자각 (朱家角)</div>
+                            <p class="p-4 text-xs text-slate-600 leading-relaxed">1,700년 역사의 강남 수향. 운하·석교·전통 가옥과 뱃놀이로 상해의 전통 문화를 체험합니다.</p>
+                        </div>
+                        <div class="bg-white rounded-xl border overflow-hidden shadow-sm">
+                            <img src="https://images.unsplash.com/photo-1548919973-5cef591cddd9?w=640&q=80" class="w-full h-36 object-cover" alt="마시청 서커스">
+                            <div class="bg-amber-600 text-white text-sm font-bold px-4 py-2">ERA · 마시청 서커스</div>
+                            <p class="p-4 text-xs text-slate-600 leading-relaxed">세계 3대 서커스로 꼽히는 화려한 곡예 공연. 중국 전통 아크로바틱과 현대 무대 기술의 조화를 감상합니다.</p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="font-bold text-xl text-[#004098] mb-4 border-b-2 border-[#004098] pb-2">3일차 · 천안천수 1000Trees</h3>
+                    <div class="bg-white rounded-xl border overflow-hidden shadow-sm max-w-3xl mx-auto">
+                        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80" class="w-full h-48 object-cover" alt="1000Trees">
+                        <div class="p-6">
+                            <p class="text-sm text-slate-600 leading-relaxed">토머스 헤더윅이 설계한 상해의 복합문화 공간. 건물 위 수목으로 산과 숲을 연상시키는 미래형 도시 공간으로, 서울 노들섬·부산 이기대 아트파크 등 국내 프로젝트와 비교 벤치마킹하기에도 의미 있는 코스입니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dining -->
+    <section id="dining" class="py-16 bg-rose-50 border-t border-rose-100">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-10">
+                <span class="inline-block bg-rose-100 text-rose-800 text-xs px-3 py-1 rounded-full font-bold mb-3">DINING PLAN</span>
+                <h2 class="text-3xl font-bold text-slate-800">식사 운영안</h2>
+                <p class="text-sm text-slate-600 mt-2">일정 확정 후 위생·맛·분위기·단체 수용 인원을 고려하여 식당 확정</p>
+            </div>
+            <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white rounded-2xl border border-rose-100 p-5 shadow-sm">
+                    <h4 class="font-bold text-[#004098] mb-3">1일차</h4>
+                    <ul class="text-sm text-slate-600 space-y-2">
+                        <li><strong>중식</strong> 공항-호텔 동선 현지식</li>
+                        <li><strong>석식</strong> 난징동루·와이탄 인근</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-2xl border border-rose-100 p-5 shadow-sm">
+                    <h4 class="font-bold text-[#004098] mb-3">2일차</h4>
+                    <ul class="text-sm text-slate-600 space-y-2">
+                        <li><strong>조식</strong> 호텔 조식</li>
+                        <li><strong>중식</strong> 주자각 수향마을 인근</li>
+                        <li><strong>석식</strong> 예원·시내 중심</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-2xl border border-rose-100 p-5 shadow-sm">
+                    <h4 class="font-bold text-[#004098] mb-3">3일차</h4>
+                    <ul class="text-sm text-slate-600 space-y-2">
+                        <li><strong>조식</strong> 호텔 조식</li>
+                        <li><strong>중식</strong> 1000Trees 인근</li>
+                    </ul>
+                </div>
+            </div>
+            <p class="text-center text-sm text-slate-500 mt-6">상해요리·사천요리·훠궈·딤섬·한식 등 다양한 메뉴 구성 가능</p>
+        </div>
+    </section>
+
+    <!-- Smart Info -->
+    <section id="smart-info" class="py-16 bg-slate-800 border-t border-slate-700">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-10">
+                <span class="inline-block bg-slate-700 text-blue-300 text-xs px-3 py-1 rounded-full font-bold mb-3">SMART INFO</span>
+                <h2 class="text-3xl font-bold text-white">필수 현지 정보</h2>
+            </div>
+            <div class="max-w-5xl mx-auto space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-slate-900 border border-slate-700 p-5 rounded-2xl">
+                        <h4 class="font-bold text-white mb-2"><i class="fa-solid fa-wifi text-blue-400 mr-2"></i>통신 (VPN)</h4>
+                        <p class="text-sm text-slate-300">현지 Wi-Fi로 카카오톡·구글 접속 제한. <strong>로밍 또는 VPN 사전 설치</strong> 필수.</p>
+                    </div>
+                    <div class="bg-slate-900 border border-slate-700 p-5 rounded-2xl">
+                        <h4 class="font-bold text-white mb-2"><i class="fa-solid fa-credit-card text-blue-400 mr-2"></i>결제 (알리페이)</h4>
+                        <p class="text-sm text-slate-300">한국에서 알리페이 앱 설치 및 <strong>신용카드 등록</strong> 권장. 모바일 결제 체험 연수에도 활용.</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl p-6 border border-blue-200">
+                    <h4 class="font-bold text-[#004098] mb-3"><i class="fa-solid fa-passport mr-2"></i>모바일 입국심사 (필수)</h4>
+                    <p class="text-sm text-slate-700 mb-4">출국 2일 전 전자 입국카드 작성 후 <strong class="text-red-600">QR 화면 캡처</strong> 저장. 입국 항공편 OZ361/OZ363 · 상하이 푸동(PVG) 도착.</p>
+                    <a href="https://s.nia.gov.cn/ArrivalCardFillingPhone/" target="_blank" class="inline-block bg-[#004098] text-white font-bold px-6 py-3 rounded-xl text-sm hover:bg-[#003080]">전자 입국신고서 작성 <i class="fa-solid fa-arrow-up-right-from-square ml-1"></i></a>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="bg-slate-900 rounded-2xl border border-slate-700 p-5">
+                        <h4 class="text-white font-bold mb-3"><i class="fa-solid fa-cloud-sun text-amber-400 mr-2"></i>상해 7일 일기예보</h4>
+                        <div id="weather-container" class="flex overflow-x-auto gap-3 pb-2 no-scrollbar text-slate-500 text-sm"><i class="fa-solid fa-spinner fa-spin mr-2"></i>불러오는 중...</div>
+                        <div id="clothing-recommendation" class="bg-slate-800 p-3 rounded-xl mt-3 text-sm text-slate-300">데이터 분석 중...</div>
+                    </div>
+                    <div class="bg-slate-900 rounded-2xl border border-slate-700 p-5">
+                        <h4 class="text-white font-bold mb-3"><i class="fa-solid fa-coins text-emerald-400 mr-2"></i>체감 환율·물가</h4>
+                        <div id="exchange-rate-display" class="text-emerald-400 font-black text-xl mb-4"><i class="fa-solid fa-spinner fa-spin text-sm"></i></div>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between text-slate-300"><span>☕ 스타벅스</span><span id="price-coffee" class="text-rose-400 font-bold">-</span></div>
+                            <div class="flex justify-between text-slate-300"><span>🚕 택시 기본</span><span id="price-taxi" class="text-sky-400 font-bold">-</span></div>
+                            <div class="flex justify-between text-slate-300"><span>💧 생수 500ml</span><span id="price-water" class="text-sky-400 font-bold">-</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Checklist -->
+    <section id="check" class="py-16 bg-slate-50 border-t">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold text-slate-800">출국 전 준비물 체크</h2>
+            </div>
+            <div class="max-w-2xl mx-auto bg-white p-6 rounded-2xl border shadow-sm">
+                <div id="checklist-container" class="space-y-2"></div>
+                <button onclick="resetChecklist()" class="mt-4 text-xs text-slate-500 underline">[초기화]</button>
+            </div>
+            <div class="text-center mt-8">
+                <a href="price-estimate.html" class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-8 py-4 rounded-2xl shadow-lg transition">
+                    <i class="fa-solid fa-file-invoice-dollar"></i> 별도 가격 산출 내역서 보기
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ESG -->
+    <section class="py-12 bg-emerald-50 border-t">
+        <div class="container mx-auto px-4 text-center max-w-4xl">
+            <h2 class="text-2xl font-bold text-slate-800 mb-4"><i class="fa-solid fa-leaf text-emerald-600 mr-2"></i>스마트 제안서 · ESG 효과</h2>
+            <p class="text-sm text-emerald-800 bg-emerald-100/50 p-4 rounded-xl">1,000명 규모 인쇄 제안서 대비 디지털 전환 시 종이·탄소·물 사용을 대폭 절감. IBK ESG 경영 방향과 부합하는 친환경 제안 방식입니다.</p>
+        </div>
+    </section>
+
+    <footer class="bg-[#f8f9fa] py-12 border-t text-center">
+        <a href="http://tourmaker.kr" target="_blank" class="inline-block border rounded-xl px-6 py-3 bg-white font-bold text-sm mb-6"><i class="fa-solid fa-home mr-1"></i> 투어메이커</a>
+        <p class="text-xs text-slate-500 max-w-2xl mx-auto leading-relaxed">[System Powered by TOURMAKER] IBK기업은행 상해 해외연수 제안 스마트 가이드북</p>
+        <p class="text-[10px] text-slate-400 mt-4">&copy; 2026 Tourmaker Inc.</p>
+    </footer>
+</div>
+
+<!-- Print Area -->
+<div id="print-area" class="hidden print:block w-full bg-white text-black p-4">
+    <div class="flex justify-between items-center mb-4 border-b-2 border-[#004098] pb-3">
+        <h1 class="text-xl font-black text-[#004098]">IBK기업은행 상해 2박3일 해외연수 일정표</h1>
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgHfgIX70O5k6Anuo0UgALIdaG9jSga9auHu3uyz0uEirylGPAJnjN_qQbvEGMUvPqUQf_g9FMNUHRxlDcUBf4vZ3Mpy4TnA9WxbmzWYK11gt2zuy_Irl4wctNFjcjLyPo0GPXV792o_J7L9guRMuDfeC1gy7USwywjYbECZgzcsHybuGRRAXAnO1eNmP8/s320/logo.png" class="h-6" alt="Tourmaker">
+    </div>
+    <p class="text-xs font-bold mb-3">■ 인원: 1회 200명 · ■ 항공: 국적기(아시아나 OZ361/OZ366) · ■ 호텔: 5성급 2박 · ■ 차량: 45인승 5대</p>
+    <table class="w-full border-collapse border-2 border-slate-800 text-[11px]">
+        <thead><tr class="bg-[#004098] text-white"><th class="border p-2 w-[12%]">일자</th><th class="border p-2">상세일정</th><th class="border p-2 w-[14%]">식사</th></tr></thead>
+        <tbody>
+            <tr><td class="border p-2 text-center font-bold">1일차</td><td class="border p-2">OZ361 09:00 출발·10:05 도착 → 중식 → 호텔 → 임시정부청사 → 신천지 → 난징동루 → 석식 → 와이탄 → 황푸강유람선 → 호텔</td><td class="border p-2 text-center">중·석</td></tr>
+            <tr><td class="border p-2 text-center font-bold">2일차</td><td class="border p-2">조식 → 스타벅스리저브 → 주자각(뱃놀이) → 예원 → 석식 → ERA서커스 → 마사지/휴식</td><td class="border p-2 text-center">조·중·석</td></tr>
+            <tr><td class="border p-2 text-center font-bold">3일차</td><td class="border p-2">조식 → 1000Trees → 중식 → 공항 → OZ366 14:00 출발 → 인천 도착 해산</td><td class="border p-2 text-center">조·중</td></tr>
+        </tbody>
+    </table>
+</div>
+
+<div id="toast" class="fixed bottom-10 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-sm px-6 py-3 rounded-full opacity-0 pointer-events-none transition-opacity z-[1000]">링크가 복사되었습니다.</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+function openTab(evt, tabId) {
+    document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active','bg-[#004098]','text-white','border-[#004098]');
+        btn.classList.add('bg-white','text-slate-500','border-slate-200');
+    });
+    document.getElementById(tabId)?.classList.remove('hidden');
+    if (evt) {
+        evt.currentTarget.classList.add('active','bg-[#004098]','text-white','border-[#004098]');
+        evt.currentTarget.classList.remove('bg-white','text-slate-500','border-slate-200');
+    }
+}
+function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg; t.classList.remove('opacity-0');
+    setTimeout(() => t.classList.add('opacity-0'), 2500);
+}
+function shareLink() {
+    const url = window.location.href;
+    if (navigator.share) navigator.share({ title: 'IBK 상해 해외연수 제안', url }).catch(()=>{});
+    else { navigator.clipboard?.writeText(url); showToast('링크가 복사되었습니다.'); }
+}
+
+const CHECK_ITEMS = [
+    '여권 (만료 6개월 이상)',
+    '중국 30일 무비자 입국 (현행 정책 확인)',
+    '전자 입국신고서 QR 캡처',
+    '알리페이 앱 설치·카드 등록',
+    'VPN 앱 사전 설치',
+    '편한 운동화·우산·겉옷',
+    '개인 상비약·보조배터리'
+];
+const STORAGE_KEY = 'ibk_check_v1';
+function renderChecklist() {
+    const c = document.getElementById('checklist-container');
+    if (!c) return;
+    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+    c.innerHTML = CHECK_ITEMS.map((label, i) => {
+        const id = 'chk_' + i;
+        return `<label class="flex items-center gap-3 border rounded-xl px-4 py-3 cursor-pointer hover:bg-slate-50"><input type="checkbox" id="${id}" ${saved[id]?'checked':''} class="h-5 w-5"><span class="text-sm">${label}</span></label>`;
+    }).join('');
+    c.querySelectorAll('input').forEach(cb => cb.addEventListener('change', () => {
+        const s = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+        s[cb.id] = cb.checked;
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(s));
+    }));
+}
+function resetChecklist() { if (confirm('초기화?')) { localStorage.removeItem(STORAGE_KEY); renderChecklist(); } }
+
+let map, markersLayer, linesLayer;
+const spots = {
+    pvg: { coords: [31.1443, 121.8083], title: '푸동공항', color: '#64748b', icon: '🛬', isSub: true },
+    hotel: { coords: [31.2350, 121.4900], title: '5성급 호텔(와이탄권)', color: '#004098', icon: '🏨' },
+    gov: { coords: [31.2185, 121.4746], title: '임시정부청사', color: '#b45309', icon: '🏛️', isSub: true },
+    xintiandi: { coords: [31.2222, 121.4764], title: '신천지', color: '#475569', icon: '☕', isSub: true },
+    nanjing: { coords: [31.2343, 121.4740], title: '난징동루', color: '#0f766e', icon: '🏙️', isSub: true },
+    bund: { coords: [31.2366, 121.4912], title: '와이탄·유람선', color: '#2563eb', icon: '⛴️', isSub: true },
+    starbucks: { coords: [31.2307, 121.4552], title: '스타벅스 리저브', color: '#92400e', icon: '☕', isSub: true },
+    zhujiajiao: { coords: [31.1097, 121.0533], title: '주자각', color: '#16a34a', icon: '🚣', isSub: true },
+    yuyuan: { coords: [31.2272, 121.4920], title: '예원', color: '#dc2626', icon: '🏮', isSub: true },
+    circus: { coords: [31.2825, 121.4485], title: '마시청 서커스', color: '#e11d48', icon: '🎪', isSub: true },
+    trees: { coords: [31.2489, 121.4438], title: '1000Trees', color: '#059669', icon: '🌳', isSub: true }
+};
+const routes = {
+    all: { points: ['pvg','gov','xintiandi','nanjing','bund','hotel','starbucks','zhujiajiao','yuyuan','circus','trees','pvg'],
+        lines: [
+            { latlngs: [spots.pvg.coords, spots.gov.coords], color: '#64748b', dash: '5,5' },
+            { latlngs: [spots.gov.coords, spots.xintiandi.coords, spots.nanjing.coords, spots.bund.coords, spots.hotel.coords], color: '#004098', dash: '' },
+            { latlngs: [spots.hotel.coords, spots.starbucks.coords, spots.zhujiajiao.coords, spots.yuyuan.coords, spots.circus.coords, spots.hotel.coords], color: '#b45309', dash: '' },
+            { latlngs: [spots.hotel.coords, spots.trees.coords, spots.pvg.coords], color: '#059669', dash: '' }
+        ]},
+    day1: { points: ['pvg','gov','xintiandi','nanjing','bund','hotel'], lines: [
+        { latlngs: [spots.pvg.coords, spots.gov.coords], color: '#64748b', dash: '5,5' },
+        { latlngs: [spots.gov.coords, spots.xintiandi.coords, spots.nanjing.coords, spots.bund.coords, spots.hotel.coords], color: '#004098', dash: '' }
+    ]},
+    day2: { points: ['hotel','starbucks','zhujiajiao','yuyuan','circus','hotel'], lines: [
+        { latlngs: [spots.hotel.coords, spots.starbucks.coords, spots.zhujiajiao.coords, spots.yuyuan.coords, spots.circus.coords, spots.hotel.coords], color: '#b45309', dash: '' }
+    ]},
+    day3: { points: ['hotel','trees','pvg'], lines: [
+        { latlngs: [spots.hotel.coords, spots.trees.coords, spots.pvg.coords], color: '#059669', dash: '' }
+    ]}
+};
+function drawMap(key) {
+    if (!map) return;
+    markersLayer.clearLayers(); linesLayer.clearLayers();
+    const r = routes[key]; const b = L.latLngBounds();
+    r.points.forEach((k, i) => {
+        const s = spots[k]; const sz = s.isSub ? 26 : 34;
+        const icon = L.divIcon({ className: 'custom-icon', html: `<div style="background:${s.color};width:${sz}px;height:${sz}px;border-radius:50%;border:2px solid #fff;display:flex;align-items:center;justify-content:center;font-size:${s.isSub?12:16}px;animation:popIn .5s forwards;animation-delay:${i*0.1}s;opacity:0">${s.icon}</div>`, iconSize: [sz,sz] });
+        L.marker(s.coords, {icon}).addTo(markersLayer).bindTooltip(`<b>${s.title}</b>`);
+        b.extend(s.coords);
+    });
+    map.fitBounds(b, { padding: [50,50], maxZoom: 12 });
+    r.lines.forEach(l => L.polyline(l.latlngs, { color: l.color, weight: 4, opacity: 0.8, dashArray: l.dash }).addTo(linesLayer));
+}
+function changeMapRoute(k) {
+    document.querySelectorAll('.map-btn').forEach(b => { b.classList.remove('active','bg-[#004098]','text-white','shadow-md'); b.classList.add('bg-white','text-slate-600'); });
+    const btn = document.querySelector(`.map-btn[onclick="changeMapRoute('${k}')"]`);
+    if (btn) { btn.classList.add('active','bg-[#004098]','text-white','shadow-md'); btn.classList.remove('bg-white','text-slate-600'); }
+    drawMap(k);
+}
+let mapInited = false;
+function initMap() {
+    if (mapInited || !window.L) return;
+    mapInited = true;
+    map = L.map('map', { scrollWheelZoom: false });
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', { maxZoom: 19 }).addTo(map);
+    markersLayer = L.layerGroup().addTo(map);
+    linesLayer = L.layerGroup().addTo(map);
+    drawMap('all');
+}
+new IntersectionObserver(e => { if (e[0].isIntersecting) { initMap(); } }, { threshold: 0.1 }).observe(document.getElementById('map-section'));
+
+let rate = 190;
+async function fetchExchangeRate() {
+    try {
+        const res = await fetch('https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/cny.json');
+        const data = await res.json();
+        rate = data.cny.krw * 1.015;
+    } catch(e) { rate = 190; }
+    document.getElementById('exchange-rate-display').textContent = `1위안 = ${rate.toFixed(1)}원`;
+    ['coffee','taxi','water'].forEach((k,i) => {
+        const p = [30,16,3][i];
+        document.getElementById('price-'+k).textContent = `약 ${Math.round(p*rate).toLocaleString()}원`;
+    });
+}
+async function fetchWeather() {
+    const c = document.getElementById('weather-container');
+    const cloth = document.getElementById('clothing-recommendation');
+    let data;
+    try {
+        const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=31.2304&longitude=121.4737&daily=weathercode,temperature_2m_max,temperature_2m_min&timezone=Asia%2FShanghai');
+        data = await res.json();
+    } catch(e) {
+        data = { daily: { time: [], weathercode: [1,2,3,1,0,2,1], temperature_2m_max: [24,25,23,22,24,26,25], temperature_2m_min: [16,17,15,14,15,17,16] } };
+        for (let i=0;i<7;i++) { const d=new Date(); d.setDate(d.getDate()+i); data.daily.time.push(d.toISOString().split('T')[0]); }
+    }
+    const icons = { 0:'☀️', 1:'🌤️', 2:'⛅', 3:'☁️', 61:'🌧️' };
+    let html = '', tmax=0, tmin=0;
+    for (let i=0;i<7;i++) {
+        const d = new Date(data.daily.time[i]);
+        const day = ['일','월','화','수','목','금','토'][d.getDay()];
+        const mx = Math.round(data.daily.temperature_2m_max[i]);
+        const mn = Math.round(data.daily.temperature_2m_min[i]);
+        tmax += mx; tmin += mn;
+        const code = data.daily.weathercode[i];
+        html += `<div class="flex-shrink-0 w-20 bg-slate-800 rounded-lg p-2 text-center border border-slate-700"><p class="text-[10px] text-slate-400">${d.getMonth()+1}/${d.getDate()}(${day})</p><p class="text-lg my-1">${icons[code]||'☁️'}</p><p class="text-xs text-white">${mn}°/${mx}°</p></div>`;
+    }
+    c.innerHTML = html;
+    cloth.innerHTML = `평균 <strong>${Math.round(tmin/7)}°~${Math.round(tmax/7)}°C</strong>. 반팔·얇은 겉옷·편한 신발 권장. 실내 에어컨 강함.`;
+}
+document.addEventListener('DOMContentLoaded', () => { renderChecklist(); fetchExchangeRate(); fetchWeather(); });
+</script>
+</body>
+</html>
