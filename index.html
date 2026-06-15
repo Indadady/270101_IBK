@@ -41,8 +41,10 @@
             body { background-color: white !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
             a[href]:after { content: none !important; }
             table { page-break-inside: auto; word-break: keep-all; }
-            tr { page-break-inside: avoid; }
+            tr { page-break-inside: avoid; page-break-after: auto; }
             th { background-color: #004098 !important; color: white !important; }
+            #print-area td { line-height: 1.5; padding: 6px !important; }
+            #print-area th { padding: 8px 4px !important; }
             .print-hidden { display: none !important; }
         }
     </style>
@@ -271,9 +273,9 @@
                 <div class="text-center mb-10 relative">
                     <span class="inline-block bg-blue-100 text-[#004098] text-xs px-3 py-1 rounded-full font-bold mb-3">OFFICIAL ITINERARY</span>
                     <h2 class="text-3xl font-bold text-slate-800">일자별 상세 일정표</h2>
-                    <button onclick="window.print()" class="mt-6 md:mt-0 md:absolute md:right-0 md:top-1/2 md:-translate-y-1/2 bg-[#004098] hover:bg-[#003080] text-white text-sm font-bold py-2.5 px-5 rounded-xl shadow-md flex items-center gap-2 mx-auto md:mx-0">
-                        <i class="fa-solid fa-print"></i> 일정표 인쇄
-                    </button>
+                        <button onclick="window.print()" class="mt-6 md:mt-0 md:absolute md:right-0 md:top-1/2 md:-translate-y-1/2 bg-[#004098] hover:bg-[#003080] text-white text-sm font-bold py-2.5 px-5 rounded-xl shadow-md flex items-center gap-2 mx-auto md:mx-0 active:scale-95 transition">
+                            <i class="fa-solid fa-print"></i> 일정표 인쇄하기
+                        </button>
                 </div>
 
                 <div class="flex overflow-x-auto no-scrollbar gap-2 mb-8 justify-start md:justify-center">
@@ -608,21 +610,106 @@
     </footer>
 </div>
 
-<!-- Print Area -->
-<div id="print-area" class="hidden print:block w-full bg-white text-black p-4">
-    <div class="flex justify-between items-center mb-4 border-b-2 border-[#004098] pb-3">
-        <h1 class="text-xl font-black text-[#004098]">IBK기업은행 상해 2박3일 해외연수 일정표</h1>
-        <img src="assets/kpc-logo.jpg" class="h-7" alt="한국생산성본부">
+<!-- Print Area (투어메이커 표준 A4 일정 양식) -->
+<div id="print-area" class="hidden print:block w-full bg-white text-black py-2">
+    <div class="flex justify-between items-center mb-4 border-b-2 border-[#004098] pb-4">
+        <div>
+            <h1 class="text-2xl font-black text-[#004098]" style="font-family: 'Nanum Myeongjo', serif;">IBK기업은행 상해 2박 3일 해외연수 일정표</h1>
+            <p class="text-[11px] text-slate-600 font-bold mt-1">한국생산성본부 기획 제안</p>
+        </div>
+        <img src="assets/kpc-logo.jpg" alt="한국생산성본부" class="h-8">
     </div>
-    <p class="text-xs font-bold mb-3">■ 인원: 1회 200명 · ■ 항공: 국적기(아시아나 OZ361/OZ366) · ■ 호텔: 5성급 2박 · ■ 차량: 45인승 5대</p>
-    <table class="w-full border-collapse border-2 border-slate-800 text-[11px]">
-        <thead><tr class="bg-[#004098] text-white"><th class="border p-2 w-[12%]">일자</th><th class="border p-2">상세일정</th><th class="border p-2 w-[14%]">식사</th></tr></thead>
+
+    <div class="mb-4 font-bold text-xs leading-relaxed text-slate-800">
+        <p>■ 일 정 : 중국 상해 2박 3일 <span class="font-normal text-slate-500">(출발일 협의 후 확정)</span></p>
+        <p>■ 인 원 : 1회 약 200명 <span class="font-normal">(45인승 대형버스 5대 · 1대당 40명 편성)</span></p>
+        <p class="text-red-700">■ 항 공 : 아시아나항공 OZ361/OZ363 출국 · OZ366 귀국 (인천국제공항 T2)</p>
+        <p>■ 호 텔 : 상해 5성급 호텔 2박 <span class="font-normal">(푸동 샹그릴라 또는 웨스틴 번드센터 후보)</span></p>
+        <p class="text-blue-800">■ 조 건 : 교육연수·벤치마킹 목적 / 공식 방문 일정은 2·3일차 중간 시간대 협의 후 확정</p>
+        <p class="text-slate-600">■ 기 획 : <strong>한국생산성본부</strong> 제안 · [System Powered by TOURMAKER]</p>
+    </div>
+
+    <table class="w-full border-collapse border-2 border-slate-800 text-[12px]" style="word-break: keep-all;">
+        <colgroup>
+            <col style="width: 11%;">
+            <col style="width: 75%;">
+            <col style="width: 14%;">
+        </colgroup>
+        <thead>
+            <tr class="bg-[#004098] text-white">
+                <th class="border border-slate-800 py-2 px-1 text-center font-bold">일자</th>
+                <th class="border border-slate-800 py-2 px-2 text-center font-bold">상세일정 (지역 및 교통편 포함)</th>
+                <th class="border border-slate-800 py-2 px-1 text-center font-bold">식사</th>
+            </tr>
+        </thead>
         <tbody>
-            <tr><td class="border p-2 text-center font-bold">1일차</td><td class="border p-2">OZ361 09:00 출발·10:05 도착 → 중식 → 호텔 → 임시정부청사 → 신천지 → 난징동루 → 석식 → 와이탄 → 황푸강유람선 → 호텔</td><td class="border p-2 text-center">중·석</td></tr>
-            <tr><td class="border p-2 text-center font-bold">2일차</td><td class="border p-2">조식 → 스타벅스리저브 → 주자각(뱃놀이) → 예원 → 석식 → ERA서커스 → 마사지/휴식</td><td class="border p-2 text-center">조·중·석</td></tr>
-            <tr><td class="border p-2 text-center font-bold">3일차</td><td class="border p-2">조식 → 1000Trees → 중식 → 공항 → OZ366 14:00 출발 → 인천 도착 해산</td><td class="border p-2 text-center">조·중</td></tr>
+            <tr>
+                <td class="border border-slate-800 py-2 px-1 text-center align-middle font-bold">
+                    1일차<br><span class="text-[10px] font-normal text-slate-500">출국일</span>
+                </td>
+                <td class="border border-slate-800 py-2 px-3 align-top leading-snug">
+                    <span class="font-bold text-[#004098]">[인천-상해 / OZ361 09:00-10:05 / 전용버스]</span><br>
+                    ■ 인천국제공항 집결 및 출국 수속 후 아시아나항공편 상해(푸동) 도착<br>
+                    ■ 중식 후 <strong>5성급 호텔</strong> 체크인 및 휴식<br>
+                    ■ 한국 근대사의 중심이었던 <strong>상해 대한민국 임시정부청사</strong> 방문<br>
+                    ■ 도시재생 복합문화공간 <strong>신천지(新天地)</strong> 방문<br>
+                    ■ <strong>난징동루</strong> 보행가 관광<br>
+                    ■ 석식 후 <strong>와이탄 야경</strong> 감상 및 <strong>황푸강 유람선</strong> 탑승<br>
+                    ■ 호텔 투숙 및 휴식
+                </td>
+                <td class="border border-slate-800 py-2 px-1 text-center align-middle text-[11px]">
+                    [조] -<br>
+                    [중] 현지식<br>
+                    [석] 현지식
+                </td>
+            </tr>
+            <tr>
+                <td class="border border-slate-800 py-2 px-1 text-center align-middle font-bold">
+                    2일차<br><span class="text-[10px] font-normal text-slate-500">연수·관광</span>
+                </td>
+                <td class="border border-slate-800 py-2 px-3 align-top leading-snug">
+                    <span class="font-bold text-[#004098]">[상해 / 전용버스]</span><br>
+                    ■ 호텔 조식 후 출발<br>
+                    ■ <strong>스타벅스 리저브 로스터리</strong> 방문 (브랜드·CX 벤치마킹)<br>
+                    ■ <strong>주자각(朱家角)</strong> 수향마을 관광 및 뱃놀이 체험<br>
+                    ■ <strong>예원 및 예원 옛거리</strong> 방문<br>
+                    ■ <strong>ERA 시공의 교차점(마시청 서커스)</strong> 관람<br>
+                    ■ 발 마사지 60분 또는 호텔 휴식 <span class="text-[10px] text-slate-500">(※ 공식 은행·핀테크 방문 확정 시 주자각 조정 가능)</span><br>
+                    ■ 호텔 투숙 및 휴식
+                </td>
+                <td class="border border-slate-800 py-2 px-1 text-center align-middle text-[11px]">
+                    [조] 호텔<br>
+                    [중] 현지식<br>
+                    [석] 현지식
+                </td>
+            </tr>
+            <tr>
+                <td class="border border-slate-800 py-2 px-1 text-center align-middle font-bold">
+                    3일차<br><span class="text-[10px] font-normal text-slate-500">귀국일</span>
+                </td>
+                <td class="border border-slate-800 py-2 px-3 align-top leading-snug">
+                    <span class="font-bold text-[#004098]">[상해-인천 / 전용버스 / OZ366 14:00 출발]</span><br>
+                    ■ 호텔 조식 후 체크아웃 및 수하물 정리<br>
+                    ■ 토머스 헤더윅 설계 <strong>천안천수 1000Trees</strong> 방문<br>
+                    ■ 중식 후 상해 푸동국제공항 이동 및 탑승 수속<br>
+                    ■ 아시아나항공(OZ366) 탑승 후 인천국제공항 도착 및 해산
+                </td>
+                <td class="border border-slate-800 py-2 px-1 text-center align-middle text-[11px]">
+                    [조] 호텔<br>
+                    [중] 현지식<br>
+                    [석] 기내식
+                </td>
+            </tr>
         </tbody>
     </table>
+
+    <div class="mt-3 flex justify-between items-end text-[10px] text-slate-600">
+        <p class="font-bold leading-relaxed">
+            ※ 원활한 행사를 위해 현지 상황에 따라 일정이 변경될 수 있습니다.<br>
+            ※ 본 일정표는 <strong>한국생산성본부</strong>가 기획·제안한 IBK기업은행 상해 해외연수 제안안입니다.
+        </p>
+        <p class="text-right font-bold whitespace-nowrap ml-4">[System Powered by TOURMAKER]</p>
+    </div>
 </div>
 
 <div id="toast" class="fixed bottom-10 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-sm px-6 py-3 rounded-full opacity-0 pointer-events-none transition-opacity z-[1000]">링크가 복사되었습니다.</div>
