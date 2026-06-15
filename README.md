@@ -10,12 +10,13 @@
 |------|------|
 | `index.html` | 고객 전달용 디지털 제안 가이드북 (가격 미포함) |
 | `price-estimate.html` | 1인 기준 가격 산출 내역서 (별도 문서) |
+| `assets/` | 한국생산성본부 로고 및 호텔·관광지 고화질 이미지 |
 
 ## GitHub Pages 배포
 
 ```bash
 cd 270101_IBK
-git add index.html price-estimate.html README.md
+git add index.html price-estimate.html README.md assets/
 git commit -m "IBK기업은행 상해 해외연수 스마트 제안 가이드북"
 git push
 ```
