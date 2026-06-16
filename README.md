@@ -12,6 +12,13 @@
 | `price-estimate.html` | 1인 기준 가격 산출 내역서 (고객 별도 제출용, 가이드북 미노출) |
 | `assets/` | 한국생산성본부 로고 및 호텔·관광지 고화질 이미지 |
 
+## 관련 저장소
+
+| 저장소 | 브랜드 | URL |
+|--------|--------|-----|
+| `270101_IBK` | 한국생산성본부 | https://indadady.github.io/270101_IBK/ |
+| `270101_IBK_SV` | 싱크버스 (SYNCVERSE) | https://indadady.github.io/270101_IBK_SV/ |
+
 ## GitHub Pages 배포
 
 ```bash
