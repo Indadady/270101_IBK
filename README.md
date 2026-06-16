@@ -17,7 +17,7 @@
 | 저장소 | 브랜드 | URL |
 |--------|--------|-----|
 | `270101_IBK` | 한국생산성본부 | https://indadady.github.io/270101_IBK/ |
-| `270101_IBK_SV` | 싱크버스 (SYNCVERSE) | https://indadady.github.io/270101_IBK_SV/ |
+| `270101_SV` | 싱크버스 (SYNCVERSE) | https://indadady.github.io/270101_SV/ |
 
 ## GitHub Pages 배포
 
